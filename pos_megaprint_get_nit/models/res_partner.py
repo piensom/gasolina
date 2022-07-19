@@ -15,6 +15,10 @@ class ResPartner(models.Model):
         request_url = "apiv2"
         request_path = ""
         request_url_firma = ""
+        if self.env.company.pruebas_fel:
+            request_url = "dev2.api"
+            request_path = ""
+            request_url_firma = "dev."
           
         if vat and vat != 'CF':
             nit = vat.replace("-", "")
