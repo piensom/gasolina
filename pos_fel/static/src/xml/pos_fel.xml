@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t owl="1" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-receipt-contact')]" position="replace">
+            <div class="pos-receipt-contact">
+                <div class="datos_factura" style="font-size:12px;text-transform:uppercase">
+                    <center>
+                        <t t-if="env.pos.invoice_journal_address">
+                            <t t-esc="env.pos.invoice_journal_address.name"/>
+                            <br/>
+                            <t t-esc="env.pos.invoice_journal_address.street"/>
+                            <br/>
+                            <t t-esc="env.pos.invoice_journal_address.street2"/>
+                            <br/>
+                            <t t-if="env.pos.invoice_journal_address.phone">Tel: 
+                                <t t-esc="env.pos.invoice_journal_address.phone"/>
+                                <br/></t>
+                        </t>
+                        <div t-if="receipt.header"><t t-esc="receipt.header" /></div>
+                        NIT: 
+                        <t t-esc="receipt.company.vat"/>
+                        <br/>
+                        <t t-esc="receipt.company.name"/>
+                        <br/>
+                        <br/>
+                        <b>Documento Tributario Electrónico FEL</b>
+                        <br/>
+                        <br/></center>
+                    <div style="text-align:left">
+                        <t t-if="state.fel_gt.firma_fel">Serie: 
+                        
+                            <t t-esc="state.fel_gt.serie_fel || ''"/>
+                            <br/>
+                            Número: 
+                        
+                            <t t-esc="state.fel_gt.numero_fel || ''"/>
+                            <br/>
+                            <t t-esc="receipt.name"/>
+                            <br/></t>
+                    </div>
+                    <div style="text-align:left">Fecha: 
+                    
+                        <t t-esc="receipt.date.localestring"/>
+                        <br/>
+                        Nombre: 
+                    
+                        <t t-esc="receipt.client.name"/>
+                        <br/>
+                        NIT: 
+                    
+                        <t t-esc="receipt.client.vat ? receipt.client.vat : 'CF'"/>
+                        <br/>
+                        Dirección:                         
+                    
+                        <t t-if="receipt.client.address">
+                            <t t-esc="receipt.client.address"/></t>
+                        <t t-else="">Ciudad
+                        </t>
+                        <br/>
+                        <br/>
+                        <t t-esc="state.fel_gt.account_move[1] || ''"/>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('before-footer')]" position="before">
+            <div style="font-size:12px;text-transform:uppercase">
+                <center>SUJETO A PAGOS TRIMESTRALES ISR 
+                
+                    <br/>
+                    Autorización: 
+                
+                    <br/>
+                    <t t-esc="state.fel_gt.firma_fel || ''"/>
+                    <br/>
+                    <div>Certificador: MEGAPRINT S.A. NIT: 5051023-1</div></center>
+            </div>
+        </xpath>
+    </t>
+</templates>

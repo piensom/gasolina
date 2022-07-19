@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_infile_get_nit.ClientDetailsEdit" t-inherit="point_of_sale.ClientDetailsEdit" t-inherit-mode="extension" owl="1">
+        <xpath expr="//input[@name='vat']" position="after">
+            <button t-on-click="trigger('get_nit')" class='button get_nit'><i class='fa fa-user' role="img" aria-label="Get NIT" title="Get NIT"/></button>
+        </xpath>
+    </t>
+</templates>
