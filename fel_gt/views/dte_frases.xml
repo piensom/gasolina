@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_dte_frases_filter" model="ir.ui.view">
+            <field name="name">dte.frases.search</field>
+            <field name="model">dte.frases</field>
+            <field name="arch" type="xml">
+                <search string="Search ">
+                    <group>
+                        <field name="name"/>
+                        <field name="nombre_frase"/>
+                        <field name="escenario"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="dte_frases_tree_view" model="ir.ui.view">
+            <field name="name">dte.frases.tree</field>
+            <field name="model">dte.frases</field>
+            <field name="arch" type="xml">
+                <tree string="Frases FEL" editable="top">
+                    <field name="default"/>
+                    <field name="name"/>
+                    <field name="descripcion_frase"/>                    
+                    <field name="tipo_frase"/>
+                    <!--<field name="nombre_frase"/>-->
+                    <field name="escenario"/>
+                    <field name="codigo_escenario"/>
+                    <!--<field name="texto_colocar"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="dte_frases">
+            <field name="name">Frases SAT DTE</field>
+            <field name="res_model">dte.frases</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" ref="view_dte_frases_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_dte_frases_tree_view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="dte_frases_tree_view"/>
+            <field name="act_window_id" ref="dte_frases"/>
+        </record>
+
+        <menuitem id="menu_dte_frases" name="Frases FEL" parent="account.menu_finance_entries_accounting_miscellaneous" action="dte_frases" sequence="46" groups="base.group_user"/>
+
+    </data>
+</odoo>
